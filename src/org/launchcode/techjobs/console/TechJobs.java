@@ -57,7 +57,9 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term: ");
-                String searchTerm = in.nextLine().toLowerCase();
+                String searchTerm = in.nextLine();
+                //note that in the JobData.findByValue() and JobData.findByColumnAndValue() methods, we lowercase the search term to force case
+                // insensitivity.
 
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
@@ -109,15 +111,22 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        // if someJobs is not empty, we want to print a table for each job.
         if (someJobs.size() > 0) {
+            // Here, we loop through the ArrayList of HashMaps. Each HashMap represents one job. The keys are job property names, the values the actual
+            // property
             for (HashMap<String, String> oneJob : someJobs) {
+                //Print a starting separator
                 System.out.println("*****");
+                //Loop through the entries in the HashMap and print out the Job Property Name (key) and the actual Property (value
                 for (Map.Entry<String, String> jobProps : oneJob.entrySet()) {
                     System.out.println(jobProps.getKey() + ": " + jobProps.getValue());
                 }
+                //Print an ending separator
                 System.out.println("*****");
             }
         } else {
+            //If there are no jobs in the ArrayList, print a message saying so.
             System.out.println("There are no results fitting this description.");
         }
     }
